@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://duoq6b6hlb7si"]
+[gd_scene load_steps=9 format=3 uid="uid://duoq6b6hlb7si"]
 
 [ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://scenes/game.gd" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="2_e2o6t"]
@@ -6,22 +6,34 @@
 [ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/coin_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/ring_spawner.tscn" id="5_7jktm"]
 
+[sub_resource type="Gradient" id="Gradient_iywne"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p57ef"]
+gradient = SubResource("Gradient_iywne")
+
+[sub_resource type="Theme" id="Theme_iywne"]
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/font_sizes/normal_font_size = 32
+
 [node name="game" type="Node2D"]
 script = ExtResource("1_80nbo")
-metadata/_edit_vertical_guides_ = [360.0]
-metadata/_edit_horizontal_guides_ = [640.0]
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+position = Vector2(0, 64)
+color = Color(0, 0, 0, 1)
 
 [node name="obstacleTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
 [node name="Background" type="Node2D" parent="."]
-visible = false
 z_index = -2
 position = Vector2(360, 512)
 
 [node name="Parallax2D" type="Parallax2D" parent="Background"]
 scale = Vector2(0.3, 0.3)
+scroll_scale = Vector2(0, 1)
 repeat_size = Vector2(1080, 1920)
 autoscroll = Vector2(0, -1200)
 repeat_times = 6
@@ -32,40 +44,55 @@ metadata/_edit_lock_ = true
 position = Vector2(-2.09808e-05, -1.52588e-05)
 texture = ExtResource("2_fc0e3")
 offset = Vector2(10.6667, 277.333)
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(360, 704)
 ignore_rotation = false
 
-[node name="Border" type="ColorRect" parent="Camera2D"]
-z_index = -5
-offset_left = -360.0
-offset_top = -640.0
-offset_right = 360.0
-offset_bottom = 640.0
-pivot_offset = Vector2(360, 640)
+[node name="Window" type="PointLight2D" parent="Camera2D"]
+position = Vector2(-2.45571e-05, 3.8147e-05)
+scale = Vector2(11.25, 20)
+range_item_cull_mask = 1023
+texture = SubResource("GradientTexture2D_p57ef")
+offset = Vector2(3.8147e-06, -1.90735e-06)
+metadata/_edit_lock_ = true
 
 [node name="Player" type="Sprite2D" parent="."]
-position = Vector2(360, 512)
+position = Vector2(0, -128)
 texture = ExtResource("2_e2o6t")
-metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Player"]
+visible = false
+offset_left = -104.0
+offset_top = -152.0
+offset_right = 112.0
+offset_bottom = -72.0
+theme = SubResource("Theme_iywne")
+text = "hiiii"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RingSpawner" parent="." instance=ExtResource("5_7jktm")]
 visible = true
-position = Vector2(360, 1920)
+position = Vector2(0, 1280)
 
 [node name="levelTimer" type="Timer" parent="."]
 wait_time = 60.0
 autostart = true
 
-[node name="CoinSpawner" parent="." instance=ExtResource("4_7jktm")]
-position = Vector2(120, 1920)
+[node name="CoinTrack" type="Node2D" parent="."]
+position = Vector2(0, 1152)
 
-[node name="CoinSpawner2" parent="." instance=ExtResource("4_7jktm")]
-position = Vector2(360, 1920)
+[node name="CoinSpawner" parent="CoinTrack" instance=ExtResource("4_7jktm")]
+position = Vector2(-200, 0)
+metadata/_edit_lock_ = true
 
-[node name="CoinSpawner3" parent="." instance=ExtResource("4_7jktm")]
-position = Vector2(600, 1920)
+[node name="CoinSpawner2" parent="CoinTrack" instance=ExtResource("4_7jktm")]
+metadata/_edit_lock_ = true
+
+[node name="CoinSpawner3" parent="CoinTrack" instance=ExtResource("4_7jktm")]
+position = Vector2(200, 0)
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="obstacleTimer" to="RingSpawner" method="_on_obstacle_timer_timeout"]
 [connection signal="timeout" from="levelTimer" to="." method="_on_level_timer_timeout"]

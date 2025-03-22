@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://uf23tfvevl86" path="res://objects/coin_spawner.gd" id="1_ke4uy"]
 
-[node name="CoinSpawner" type="Node2D"]
+[node name="CoinSpawner" type="Node2D" groups=["Coin track"]]
 script = ExtResource("1_ke4uy")
 
 [node name="coinTimer" type="Timer" parent="."]
