@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://duoq6b6hlb7si"]
+
+[ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://scenes/game.gd" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://brtwlynh0skve" path="res://art/bg.jpg" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/coin_spawner.tscn" id="4_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/ring_spawner.tscn" id="5_7jktm"]
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_80nbo")
+metadata/_edit_vertical_guides_ = [360.0]
+metadata/_edit_horizontal_guides_ = [640.0]
+
+[node name="obstacleTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Background" type="Node2D" parent="."]
+visible = false
+z_index = -2
+position = Vector2(360, 512)
+
+[node name="Parallax2D" type="Parallax2D" parent="Background"]
+scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(1080, 1920)
+autoscroll = Vector2(0, -1200)
+repeat_times = 6
+follow_viewport = false
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D"]
+position = Vector2(-2.09808e-05, -1.52588e-05)
+texture = ExtResource("2_fc0e3")
+offset = Vector2(10.6667, 277.333)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(360, 704)
+ignore_rotation = false
+
+[node name="Border" type="ColorRect" parent="Camera2D"]
+z_index = -5
+offset_left = -360.0
+offset_top = -640.0
+offset_right = 360.0
+offset_bottom = 640.0
+pivot_offset = Vector2(360, 640)
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(360, 512)
+texture = ExtResource("2_e2o6t")
+metadata/_edit_lock_ = true
+
+[node name="RingSpawner" parent="." instance=ExtResource("5_7jktm")]
+visible = true
+position = Vector2(360, 1920)
+
+[node name="levelTimer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[node name="CoinSpawner" parent="." instance=ExtResource("4_7jktm")]
+position = Vector2(120, 1920)
+
+[node name="CoinSpawner2" parent="." instance=ExtResource("4_7jktm")]
+position = Vector2(360, 1920)
+
+[node name="CoinSpawner3" parent="." instance=ExtResource("4_7jktm")]
+position = Vector2(600, 1920)
+
+[connection signal="timeout" from="obstacleTimer" to="RingSpawner" method="_on_obstacle_timer_timeout"]
+[connection signal="timeout" from="levelTimer" to="." method="_on_level_timer_timeout"]
