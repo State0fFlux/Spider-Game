@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://duoq6b6hlb7si"]
+[gd_scene load_steps=7 format=3 uid="uid://duoq6b6hlb7si"]
 
 [ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="2_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://brtwlynh0skve" path="res://bg.jpg" id="2_fc0e3"]
 [ext_resource type="Script" uid="uid://dlvfxigt86j5r" path="res://spawner.gd" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://cd0tj8f74y82j" path="res://ring_obstacle.tscn" id="4_fc0e3"]
 
 [sub_resource type="Theme" id="Theme_e2o6t"]
 RichTextLabel/font_sizes/normal_font_size = 32
@@ -14,7 +15,6 @@ metadata/_edit_vertical_guides_ = [360.0]
 metadata/_edit_horizontal_guides_ = [640.0]
 
 [node name="Background" type="Node2D" parent="."]
-position = Vector2(360, 512)
 
 [node name="Parallax2D" type="Parallax2D" parent="Background"]
 scale = Vector2(0.3, 0.3)
@@ -25,35 +25,51 @@ follow_viewport = false
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D"]
-position = Vector2(-2.09808e-05, -1.52588e-05)
 texture = ExtResource("2_fc0e3")
 offset = Vector2(10.6667, 277.333)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(360, 512)
-scale = Vector2(6, 6)
-offset = Vector2(0, 128)
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 280.0
-offset_top = 320.0
-offset_right = 432.0
-offset_bottom = 416.0
+offset_left = -72.0
+offset_top = -144.0
+offset_right = 80.0
+offset_bottom = -48.0
 theme = SubResource("Theme_e2o6t")
 text = "hi"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Obj" type="Sprite2D" parent="."]
-position = Vector2(360, 512)
+[node name="Player" type="Sprite2D" parent="."]
 texture = ExtResource("2_e2o6t")
+metadata/_edit_lock_ = true
+
+[node name="Plus" type="Button" parent="Player"]
+offset_left = 8.0
+offset_top = -160.0
+offset_right = 80.0
+offset_bottom = -120.0
+text = "Plus"
+
+[node name="Minus" type="Button" parent="Player"]
+offset_left = -80.0
+offset_top = -160.0
+offset_right = -8.0
+offset_bottom = -120.0
+text = "Minus"
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+scale = Vector2(6, 6)
+offset = Vector2(0, 128)
 
 [node name="Spawner" type="Node2D" parent="."]
-position = Vector2(360, 1664)
+position = Vector2(0, 1280)
 script = ExtResource("3_feb5d")
 
 [node name="spawnTimer" type="Timer" parent="Spawner"]
-wait_time = 5.0
 autostart = true
 
+[node name="Ringobstacle" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(0, 1280)
+
+[connection signal="pressed" from="Player/Plus" to="." method="_on_plus_pressed"]
+[connection signal="pressed" from="Player/Minus" to="." method="_on_minus_pressed"]
 [connection signal="timeout" from="Spawner/spawnTimer" to="Spawner" method="_on_spawn_timer_timeout"]
