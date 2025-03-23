@@ -1,31 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6oh02wusy665"]
 
-[ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="1_eqqp1"]
+[ext_resource type="Script" uid="uid://7hr8o2sia3ym" path="res://objects/player.gd" id="1_ykyjo"]
+[ext_resource type="Texture2D" uid="uid://dn620hegde1x6" path="res://art/beetle.png" id="2_ykyjo"]
 
-[sub_resource type="Theme" id="Theme_iywne"]
-RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
-RichTextLabel/font_sizes/normal_font_size = 32
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ykyjo"]
+radius = 64.0
+height = 336.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_eqqp1"]
-radius = 32.0
-
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+motion_mode = 1
+script = ExtResource("1_ykyjo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_eqqp1")
+texture = ExtResource("2_ykyjo")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
-offset_left = -104.0
-offset_top = -152.0
-offset_right = 112.0
-offset_bottom = -72.0
-theme = SubResource("Theme_iywne")
-text = "hiiii"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_eqqp1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_ykyjo")

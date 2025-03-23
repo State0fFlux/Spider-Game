@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://duoq6b6hlb7si"]
+[gd_scene load_steps=12 format=3 uid="uid://duoq6b6hlb7si"]
 
 [ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://scenes/game.gd" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://brtwlynh0skve" path="res://art/bg.jpg" id="2_fc0e3"]
@@ -7,18 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/coin_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/web_spawner.tscn" id="5_7jktm"]
 
-[sub_resource type="Gradient" id="Gradient_p57ef"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5sy4"]
-gradient = SubResource("Gradient_p57ef")
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.1, 0.9)
-metadata/_snap_enabled = true
-
 [sub_resource type="Gradient" id="Gradient_u5sy4"]
-offsets = PackedFloat32Array(0, 0.668831, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.574675, 0.662338, 0.99026)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.586583, 0.586583, 0.586583, 1, 0.0904823, 0.0904823, 0.0904823, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gee14"]
 gradient = SubResource("Gradient_u5sy4")
@@ -55,11 +46,26 @@ func _process(delta: float) -> void:
 	text = \"Distance: \" + str(Global.dist)
 "
 
+[sub_resource type="Curve" id="Curve_p57ef"]
+_limits = [0.0, 30.0, -1.0, 1.5]
+_data = [Vector2(-0.0542327, 7.34474), 0.0, 0.0, 0, 0, Vector2(0.0648148, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="game" type="Node2D"]
 script = ExtResource("1_80nbo")
-metadata/_edit_vertical_guides_ = [0.0]
+metadata/_edit_vertical_guides_ = [0.0, -960.0, 960.0]
+metadata/_edit_horizontal_guides_ = [540.0, -540.0]
+
+[node name="Border" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border"]
+build_mode = 1
+polygon = PackedVector2Array(-960, -544, 960, -544, 960, 544, -960, 544)
 
 [node name="Darkness" type="CanvasModulate" parent="."]
+visible = false
 position = Vector2(0, 64)
 color = Color(0, 0, 0, 1)
 
@@ -69,7 +75,6 @@ autostart = true
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -2
-position = Vector2(360, 512)
 
 [node name="Parallax2D" type="Parallax2D" parent="Background"]
 scale = Vector2(0.3, 0.3)
@@ -89,41 +94,35 @@ metadata/_edit_lock_ = true
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
 
-[node name="Window" type="PointLight2D" parent="Camera2D"]
-position = Vector2(-2.45571e-05, 3.8147e-05)
-scale = Vector2(11.25, 20)
-energy = 0.2
-range_item_cull_mask = 1023
-texture = SubResource("GradientTexture2D_u5sy4")
-offset = Vector2(3.8147e-06, -1.90735e-06)
-metadata/_edit_lock_ = true
-
-[node name="Vignette" type="PointLight2D" parent="Camera2D/Window"]
+[node name="Vignette" type="PointLight2D" parent="Camera2D"]
+visible = false
+position = Vector2(2.38419e-07, 4.76837e-07)
+scale = Vector2(29.875, 16.875)
 energy = 0.8
 texture = SubResource("GradientTexture2D_gee14")
 
-[node name="UI" type="Node2D" parent="Camera2D/Window"]
-position = Vector2(2.18285e-06, -1.90735e-06)
-scale = Vector2(0.0888889, 0.05)
+[node name="UI" type="Node2D" parent="Camera2D"]
+position = Vector2(-7.15256e-07, 0)
+scale = Vector2(2.65556, 0.84375)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D/Window/UI"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D/UI"]
 follow_viewport_enabled = true
 
-[node name="Coins Label" type="RichTextLabel" parent="Camera2D/Window/UI/CanvasLayer"]
+[node name="Coins Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
 offset_left = -344.0
-offset_top = 528.0
+offset_top = 408.0
 offset_right = -16.0
-offset_bottom = 624.0
+offset_bottom = 504.0
 theme = ExtResource("3_p57ef")
 text = "Coins: 0"
 vertical_alignment = 1
 script = SubResource("GDScript_iywne")
 
-[node name="Distance Label" type="RichTextLabel" parent="Camera2D/Window/UI/CanvasLayer"]
-offset_left = 16.0
-offset_top = 528.0
-offset_right = 344.0
-offset_bottom = 624.0
+[node name="Distance Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
+offset_left = 160.0
+offset_top = 408.0
+offset_right = 488.0
+offset_bottom = 504.0
 text = "Distance: 0"
 vertical_alignment = 1
 script = SubResource("GDScript_p57ef")
@@ -131,6 +130,14 @@ script = SubResource("GDScript_p57ef")
 [node name="Player" parent="." instance=ExtResource("3_iywne")]
 z_index = 5
 position = Vector2(0, -128)
+scale = Vector2(0.5, 0.5)
+
+[node name="Line2D" type="Line2D" parent="Player"]
+z_index = -1
+points = PackedVector2Array(0, -96, 0, -3952)
+width = 20.0
+width_curve = SubResource("Curve_p57ef")
+default_color = Color(0.658824, 0.666667, 0.572549, 1)
 
 [node name="WebSpawner" parent="." instance=ExtResource("5_7jktm")]
 position = Vector2(0, 1280)
@@ -156,5 +163,10 @@ metadata/_edit_lock_ = true
 position = Vector2(200, 0)
 metadata/_edit_lock_ = true
 
+[node name="windTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [connection signal="timeout" from="obstacleTimer" to="WebSpawner" method="_on_obstacle_timer_timeout"]
 [connection signal="timeout" from="levelTimer" to="." method="_on_level_timer_timeout"]
+[connection signal="timeout" from="windTimer" to="." method="_on_wind_timer_timeout"]

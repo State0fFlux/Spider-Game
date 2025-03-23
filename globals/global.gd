@@ -1,10 +1,12 @@
 extends Node
 
-var rotation_angle = 0.0
 var speed = 400
 var dist: int = 0
 
-var drift_position = 0.0
+var wind_from_east = false
+var wind_strength = 0.0
+
+var on_bridge = false
 
 @onready var garbage = $GarbageCollector
 
