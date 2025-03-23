@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6oh02wusy665"]
+
+[ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="1_eqqp1"]
+
+[sub_resource type="Theme" id="Theme_iywne"]
+RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
+RichTextLabel/font_sizes/normal_font_size = 32
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eqqp1"]
+radius = 32.0
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_eqqp1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -104.0
+offset_top = -152.0
+offset_right = 112.0
+offset_bottom = -72.0
+theme = SubResource("Theme_iywne")
+text = "hiiii"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_eqqp1")

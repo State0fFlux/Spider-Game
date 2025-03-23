@@ -7,7 +7,18 @@ extends Node2D
 @onready var bg = $Background
 @onready var text = $Player/RichTextLabel
 
+@onready var garbage = $GarbageCollector
+
 func _ready() -> void:
+	
+	# Reset starting values
+	Global.speed = 400
+	parallax.autoscroll.y = -Global.speed
+	Global.dist = 0
+	Global.rotation_angle = 0
+	Global.drift_position = 0
+	Global.garbage = garbage
+	
 	Input.use_accumulated_input = false
 	if OS.get_name() in ["Android", "iOS"]:
 		Global.mobile = true
@@ -16,6 +27,10 @@ func _ready() -> void:
 		get_viewport().size = Vector2(1280,1280)
 
 func _process(delta):
+	# Handle distance accumulation
+	Global.dist += Global.speed * delta / 5
+	
+	# Handle movement
 	if Global.mobile:
 		var grav = Input.get_gravity()
 		
@@ -48,7 +63,7 @@ func _process(delta):
 	cam.position.x = -Global.drift_position
 	bg.position.x = -Global.drift_position # TODO: fix after updating parallax sprite
 
-func set_speed(speed) -> void:
+func tween_speed(speed) -> void:
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(Global, "speed", speed, 5)
 	tween.tween_property(parallax, "autoscroll", 1.5 * Vector2(0, -speed), 5)
@@ -56,4 +71,4 @@ func set_speed(speed) -> void:
 	#parallax.autoscroll.y = -speed
 
 func _on_level_timer_timeout() -> void:
-	set_speed(Global.speed + Global.speed / 2)
+	tween_speed(1.5 * Global.speed)

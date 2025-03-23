@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cd0tj8f74y82j"]
+
+[ext_resource type="Script" uid="uid://du3o4jkxsh7ov" path="res://objects/web_obstacle.gd" id="1_e33dw"]
+[ext_resource type="Texture2D" uid="uid://basldys7sgo60" path="res://art/bitmap.svg" id="2_4pnbn"]
+
+[sub_resource type="Shader" id="Shader_aj0t4"]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec4 noise_color = texture(TEXTURE, UV);
+
+    // Set transparency based on brightness (adjust the threshold if needed)
+    float brightness = (noise_color.r + noise_color.g + noise_color.b) / 3.0;
+
+    // Keep the noise color but apply transparency
+    COLOR = vec4(noise_color.rgb, brightness);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t134x"]
+shader = SubResource("Shader_aj0t4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_aj0t4"]
+noise_type = 2
+frequency = 0.0153
+cellular_distance_function = 1
+cellular_jitter = 1.5
+cellular_return_type = 6
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t134x"]
+seamless = true
+noise = SubResource("FastNoiseLite_aj0t4")
+
+[node name="Web" type="Node2D"]
+script = ExtResource("1_e33dw")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+clip_children = 1
+polygon = PackedVector2Array(720, -256, 720, 256, 0, 128, -720, 256, -720, -256, 0, -128)
+
+[node name="Ring" type="Node2D" parent="Polygon2D" groups=["Obstacle"]]
+
+[node name="SelfRing" type="Node2D" parent="Polygon2D/Ring"]
+
+[node name="Gap" type="Polygon2D" parent="Polygon2D/Ring/SelfRing"]
+z_index = 1
+position = Vector2(-1.33514e-05, 4.06351)
+scale = Vector2(0.75, 1.01587)
+polygon = PackedVector2Array(160, 248, -160, 248, -80, 1.24997, -160, -256, 160, -256, 88, -4.00003)
+
+[node name="OldWheelLol" type="Sprite2D" parent="Polygon2D/Ring/SelfRing"]
+visible = false
+z_index = -1
+position = Vector2(-1.33333, 0)
+texture = ExtResource("2_4pnbn")
+metadata/_edit_lock_ = true
+
+[node name="WebNoise" type="Sprite2D" parent="Polygon2D"]
+material = SubResource("ShaderMaterial_t134x")
+position = Vector2(-4.00001, 16)
+scale = Vector2(2.89062, 1.71875)
+texture = SubResource("NoiseTexture2D_t134x")

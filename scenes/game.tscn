@@ -1,23 +1,63 @@
-[gd_scene load_steps=9 format=3 uid="uid://duoq6b6hlb7si"]
+[gd_scene load_steps=13 format=3 uid="uid://duoq6b6hlb7si"]
 
 [ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://scenes/game.gd" id="1_80nbo"]
-[ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="2_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://brtwlynh0skve" path="res://art/bg.jpg" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c6oh02wusy665" path="res://objects/player.tscn" id="3_iywne"]
+[ext_resource type="Theme" uid="uid://dymcexubug2ec" path="res://theme.tres" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/coin_spawner.tscn" id="4_7jktm"]
-[ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/ring_spawner.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/web_spawner.tscn" id="5_7jktm"]
 
-[sub_resource type="Gradient" id="Gradient_iywne"]
+[sub_resource type="Gradient" id="Gradient_p57ef"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_p57ef"]
-gradient = SubResource("Gradient_iywne")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5sy4"]
+gradient = SubResource("Gradient_p57ef")
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.1, 0.9)
+metadata/_snap_enabled = true
 
-[sub_resource type="Theme" id="Theme_iywne"]
-RichTextLabel/colors/default_color = Color(1, 1, 1, 1)
-RichTextLabel/font_sizes/normal_font_size = 32
+[sub_resource type="Gradient" id="Gradient_u5sy4"]
+offsets = PackedFloat32Array(0, 0.668831, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gee14"]
+gradient = SubResource("Gradient_u5sy4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="GDScript" id="GDScript_iywne"]
+script/source = "extends RichTextLabel
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = \"Coins: \" + str(Stats.coins)
+"
+
+[sub_resource type="GDScript" id="GDScript_p57ef"]
+script/source = "extends RichTextLabel
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	text = \"Distance: \" + str(Global.dist)
+"
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_80nbo")
+metadata/_edit_vertical_guides_ = [0.0]
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 position = Vector2(0, 64)
@@ -52,33 +92,55 @@ ignore_rotation = false
 [node name="Window" type="PointLight2D" parent="Camera2D"]
 position = Vector2(-2.45571e-05, 3.8147e-05)
 scale = Vector2(11.25, 20)
+energy = 0.2
 range_item_cull_mask = 1023
-texture = SubResource("GradientTexture2D_p57ef")
+texture = SubResource("GradientTexture2D_u5sy4")
 offset = Vector2(3.8147e-06, -1.90735e-06)
 metadata/_edit_lock_ = true
 
-[node name="Player" type="Sprite2D" parent="."]
-position = Vector2(0, -128)
-texture = ExtResource("2_e2o6t")
+[node name="Vignette" type="PointLight2D" parent="Camera2D/Window"]
+energy = 0.8
+texture = SubResource("GradientTexture2D_gee14")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Player"]
-visible = false
-offset_left = -104.0
-offset_top = -152.0
-offset_right = 112.0
-offset_bottom = -72.0
-theme = SubResource("Theme_iywne")
-text = "hiiii"
-horizontal_alignment = 1
+[node name="UI" type="Node2D" parent="Camera2D/Window"]
+position = Vector2(2.18285e-06, -1.90735e-06)
+scale = Vector2(0.0888889, 0.05)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D/Window/UI"]
+follow_viewport_enabled = true
+
+[node name="Coins Label" type="RichTextLabel" parent="Camera2D/Window/UI/CanvasLayer"]
+offset_left = -344.0
+offset_top = 528.0
+offset_right = -16.0
+offset_bottom = 624.0
+theme = ExtResource("3_p57ef")
+text = "Coins: 0"
 vertical_alignment = 1
+script = SubResource("GDScript_iywne")
 
-[node name="RingSpawner" parent="." instance=ExtResource("5_7jktm")]
-visible = true
+[node name="Distance Label" type="RichTextLabel" parent="Camera2D/Window/UI/CanvasLayer"]
+offset_left = 16.0
+offset_top = 528.0
+offset_right = 344.0
+offset_bottom = 624.0
+text = "Distance: 0"
+vertical_alignment = 1
+script = SubResource("GDScript_p57ef")
+
+[node name="Player" parent="." instance=ExtResource("3_iywne")]
+z_index = 5
+position = Vector2(0, -128)
+
+[node name="WebSpawner" parent="." instance=ExtResource("5_7jktm")]
 position = Vector2(0, 1280)
 
 [node name="levelTimer" type="Timer" parent="."]
 wait_time = 60.0
 autostart = true
+
+[node name="GarbageCollector" type="Node2D" parent="."]
+position = Vector2(0, -1280)
 
 [node name="CoinTrack" type="Node2D" parent="."]
 position = Vector2(0, 1152)
@@ -94,5 +156,5 @@ metadata/_edit_lock_ = true
 position = Vector2(200, 0)
 metadata/_edit_lock_ = true
 
-[connection signal="timeout" from="obstacleTimer" to="RingSpawner" method="_on_obstacle_timer_timeout"]
+[connection signal="timeout" from="obstacleTimer" to="WebSpawner" method="_on_obstacle_timer_timeout"]
 [connection signal="timeout" from="levelTimer" to="." method="_on_level_timer_timeout"]

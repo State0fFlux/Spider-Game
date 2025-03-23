@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cry7s8cifyqhu"]
+[gd_scene load_steps=4 format=3 uid="uid://cry7s8cifyqhu"]
 
 [ext_resource type="Script" uid="uid://by3v3kinxgcl" path="res://objects/coin.gd" id="1_0t63x"]
 [ext_resource type="Texture2D" uid="uid://dloe182145p2o" path="res://icon.svg" id="1_d5gmh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_je4cw"]
+radius = 64.0
 
 [node name="Coin" type="Node2D"]
 script = ExtResource("1_0t63x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_d5gmh")
+
+[node name="Collision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("CircleShape2D_je4cw")
+
+[connection signal="area_entered" from="Collision" to="." method="_on_collision_area_entered"]

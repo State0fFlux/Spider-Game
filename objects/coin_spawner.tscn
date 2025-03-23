@@ -6,7 +6,7 @@
 script = ExtResource("1_ke4uy")
 
 [node name="coinTimer" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="coinTimer" to="." method="_on_coin_timer_timeout"]
