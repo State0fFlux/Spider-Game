@@ -16,4 +16,7 @@
 - **Languages**: GDScript, GLSL
 - **Art & Design**: Inkscape
 - **Other Tools**: XCode (for testing beta mobile mechanics)
+
+## Public Demo
+- This game is currently up on my [itch.io](https://state0fflux.itch.io/where-the-wind-goes) account!
 ---
