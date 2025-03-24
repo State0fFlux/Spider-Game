@@ -11,14 +11,18 @@ config_version=5
 [application]
 
 config/name="Where the Wind Goes"
-run/main_scene="uid://duoq6b6hlb7si"
+config/description="Where the Wind Goes is a wind-powered endless scroller where you play as a beetle tangled in a spiderweb, navigating through nature’s obstacles. Using gusts of wind, you’ll manipulate the environment to guide your path, all while avoiding the dangers of the web."
+run/main_scene="uid://dwsmll4su5prj"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.47451, 0.627451, 0.705882, 1)
+boot_splash/image="uid://cv5l2igfusl7m"
+config/icon="uid://v5p8mj8lba22"
 
 [autoload]
 
 Global="*res://globals/global.gd"
 Stats="*res://globals/stats.gd"
+Utils="*res://globals/utils.gd"
 
 [display]
 
@@ -83,4 +87,4 @@ move_down={
 
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.47451, 0.627451, 0.705882, 1)

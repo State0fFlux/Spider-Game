@@ -1,6 +1,8 @@
 extends Node2D
 
 const WIND_STRENGTH = 2.0
+const DIST_SCALE = 0.01 # in inches
+
 @onready var egg = $EggTrack
 @onready var garbage = $GarbageCollector
 
@@ -9,12 +11,12 @@ func _ready() -> void:
 	# Reset starting values
 	Global.speed = 400
 	Global.dist = 0
-	Global.wind_direction = 1.0
+	Global.wind_direction = 1.0 * (-1 if randi_range(0,1) == 0 else 1)
 	Global.garbage = garbage
 
 func _process(delta):
 	# Handle distance accumulation
-	Global.dist += Global.speed * delta / 5
+	Global.dist += Global.speed * delta * DIST_SCALE
 	
 	# Handle wind gusts
 	var input = Input.get_axis("rotate_left", "rotate_right")

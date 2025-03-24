@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c16sah47a21lh" path="res://art/fg.png" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c2c1vrnnfxc5" path="res://art/bg.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c6oh02wusy665" path="res://objects/player.tscn" id="3_iywne"]
-[ext_resource type="Theme" uid="uid://dymcexubug2ec" path="res://theme.tres" id="3_p57ef"]
+[ext_resource type="Theme" uid="uid://dymcexubug2ec" path="res://spring_theme.tres" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/egg_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/web_spawner.tscn" id="5_7jktm"]
 
@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	scroll_base_offset -= Vector2(0, Global.speed * delta)
 "
 
-[sub_resource type="GDScript" id="GDScript_iywne"]
+[sub_resource type="GDScript" id="GDScript_gee14"]
 script/source = "extends RichTextLabel
 
 
@@ -33,10 +33,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = \"Eggs: \" + str(Stats.eggs)
+	text = \"eggs[i]: \" + Global.num_format(Stats.eggs) + \"[/i]\"
 "
 
-[sub_resource type="GDScript" id="GDScript_p57ef"]
+[sub_resource type="GDScript" id="GDScript_0tnpc"]
 script/source = "extends RichTextLabel
 
 
@@ -47,7 +47,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = \"Distance: \" + str(Global.dist)
+	text = \"distance[i]: \" + Global.num_format(Global.dist) + \"[/i] inches\"
 "
 
 [sub_resource type="Curve" id="Curve_p57ef"]
@@ -67,16 +67,16 @@ fill_to = Vector2(0.860092, 0.144495)
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_80nbo")
-metadata/_edit_vertical_guides_ = [0.0, -960.0, 960.0]
-metadata/_edit_horizontal_guides_ = [540.0, -540.0]
 
 [node name="Border" type="StaticBody2D" parent="."]
 collision_layer = 8
 collision_mask = 3
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border"]
 build_mode = 1
 polygon = PackedVector2Array(-960, -544, 960, -544, 960, 544, -960, 544)
+metadata/_edit_lock_ = true
 
 [node name="Petals" parent="." instance=ExtResource("2_gee14")]
 position = Vector2(0, -536)
@@ -99,34 +99,35 @@ script = SubResource("GDScript_u5sy4")
 
 [node name="Background" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_scale = Vector2(0, 1.5)
-motion_mirroring = Vector2(0, 2701)
+motion_mirroring = Vector2(0, 2696)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
-position = Vector2(-2.09808e-05, -1.52588e-05)
+position = Vector2(-960, -536)
 texture = ExtResource("2_u5sy4")
-metadata/_edit_lock_ = true
+centered = false
 
 [node name="Foreground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_scale = Vector2(0, 1)
-motion_mirroring = Vector2(0, 2701)
+motion_mirroring = Vector2(0, 2696)
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Foreground"]
-position = Vector2(-2.09808e-05, -1.52588e-05)
+position = Vector2(-960, -536)
 texture = ExtResource("2_p57ef")
-metadata/_edit_lock_ = true
+centered = false
 
 [node name="Sky" type="ColorRect" parent="Background/ParallaxBackground"]
 z_index = -10
 offset_left = -960.0
-offset_top = -544.0
+offset_top = -536.0
 offset_right = 960.0
 offset_bottom = 544.0
 color = Color(0.580234, 0.852195, 0.987246, 1)
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, 4)
 ignore_rotation = false
 
 [node name="UI" type="Node2D" parent="Camera2D"]
@@ -137,21 +138,27 @@ scale = Vector2(2.65556, 0.84375)
 follow_viewport_enabled = true
 
 [node name="Eggs Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
-offset_left = -488.0
-offset_top = 344.0
-offset_bottom = 512.0
+offset_left = 240.0
+offset_top = 296.0
+offset_right = 728.0
+offset_bottom = 464.0
 theme = ExtResource("3_p57ef")
-text = "Eggs: 0"
+theme_type_variation = &"Heading"
+bbcode_enabled = true
+text = "eggs[i]: 500 [/i]"
 vertical_alignment = 1
-script = SubResource("GDScript_iywne")
+script = SubResource("GDScript_gee14")
 
 [node name="Distance Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
-offset_top = 352.0
-offset_right = 888.0
-offset_bottom = 496.0
-text = "Distance: 0"
+offset_left = 160.0
+offset_top = 400.0
+offset_right = 1048.0
+offset_bottom = 544.0
+theme_type_variation = &"Heading"
+bbcode_enabled = true
+text = "Distance[i]: 500[/i] inches"
 vertical_alignment = 1
-script = SubResource("GDScript_p57ef")
+script = SubResource("GDScript_0tnpc")
 
 [node name="Player" parent="." instance=ExtResource("3_iywne")]
 z_index = 5

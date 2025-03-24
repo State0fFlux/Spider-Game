@@ -10,3 +10,9 @@ func _physics_process(delta: float) -> void:
 	velocity.y = move_toward(velocity.y, ver_direction * SPEED, SPEED/5)
 
 	move_and_slide()
+
+func die():
+	if Global.dist > Stats.high_score:
+		Stats.high_score = Global.dist
+	Utils.saveGame()
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
