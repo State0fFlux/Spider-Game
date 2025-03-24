@@ -1,47 +1,87 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dymcexubug2ec"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://dymcexubug2ec"]
 
-[ext_resource type="Texture2D" uid="uid://30qm47nnfxoj" path="res://art/petal.png" id="1_cfugr"]
 [ext_resource type="FontFile" uid="uid://cuyoc4qnppph8" path="res://fonts/secret-midnight-font/SecretMidnight-518n8.otf" id="2_000it"]
 [ext_resource type="FontFile" uid="uid://q2hjrhg574t1" path="res://fonts/SuperFrog-Yqy1q.ttf" id="3_kton3"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfugr"]
-texture = ExtResource("1_cfugr")
-expand_margin_left = 50.0
-expand_margin_top = 50.0
-expand_margin_right = 50.0
-expand_margin_bottom = 50.0
-modulate_color = Color(0.762404, 0.762404, 0.762404, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yo8mr"]
+bg_color = Color(0.348336, 0.532488, 0.372389, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.139749, 0.281256, 0.17974, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 5
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 5
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+shadow_color = Color(0, 0, 0, 0.513726)
+shadow_size = 5
+shadow_offset = Vector2(20, 40)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kton3"]
-texture = ExtResource("1_cfugr")
-expand_margin_left = 50.0
-expand_margin_top = 50.0
-expand_margin_right = 50.0
-expand_margin_bottom = 50.0
-modulate_color = Color(0.762404, 0.762404, 0.762404, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hon52"]
+bg_color = Color(0.348336, 0.532488, 0.372389, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.139749, 0.281256, 0.17974, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 5
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 5
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+shadow_color = Color(0, 0, 0, 0.513726)
+shadow_size = 5
+shadow_offset = Vector2(20, 40)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_110ce"]
-texture = ExtResource("1_cfugr")
-expand_margin_left = 50.0
-expand_margin_top = 50.0
-expand_margin_right = 50.0
-expand_margin_bottom = 50.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnsuq"]
+bg_color = Color(0.421903, 0.6258, 0.447847, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.139749, 0.281256, 0.17974, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 5
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 5
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+shadow_color = Color(0, 0, 0, 0.356863)
+shadow_size = 5
+shadow_offset = Vector2(20, 40)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_000it"]
-texture = ExtResource("1_cfugr")
-expand_margin_left = 50.0
-expand_margin_top = 50.0
-expand_margin_right = 50.0
-expand_margin_bottom = 50.0
-modulate_color = Color(0.511259, 0.511259, 0.511259, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sh3uj"]
+bg_color = Color(0.257386, 0.40726, 0.27736, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.139749, 0.281256, 0.17974, 1)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 5
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 5
+expand_margin_left = 40.0
+expand_margin_right = 40.0
+shadow_color = Color(0, 0, 0, 0.686275)
+shadow_size = 5
+shadow_offset = Vector2(20, 40)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfugr"]
-bg_color = Color(0.923191, 0.799942, 0.941733, 1)
+bg_color = Color(0.748475, 0.709073, 0.650135, 1)
 border_width_left = 25
 border_width_top = 25
 border_width_right = 25
 border_width_bottom = 25
-border_color = Color(0.65007, 0.878826, 0.507259, 1)
+border_color = Color(0.270588, 0.0980392, 0.215686, 1)
 border_blend = true
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -89,24 +129,28 @@ Button/colors/font_hover_pressed_color = Color(0.768627, 0.909804, 0.647059, 1)
 Button/colors/font_outline_color = Color(0.42302, 0.562348, 0.28901, 1)
 Button/colors/font_pressed_color = Color(0.338274, 0.40045, 0.308626, 1)
 Button/constants/outline_size = 25
-Button/styles/hover = SubResource("StyleBoxTexture_cfugr")
-Button/styles/hover_pressed = SubResource("StyleBoxTexture_kton3")
-Button/styles/normal = SubResource("StyleBoxTexture_110ce")
-Button/styles/pressed = SubResource("StyleBoxTexture_000it")
+Button/styles/hover = SubResource("StyleBoxFlat_yo8mr")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_hon52")
+Button/styles/normal = SubResource("StyleBoxFlat_bnsuq")
+Button/styles/pressed = SubResource("StyleBoxFlat_sh3uj")
 Heading/base_type = &"RichTextLabel"
 Heading/colors/default_color = Color(0.768627, 0.909804, 0.647059, 1)
 Heading/colors/font_outline_color = Color(0.258824, 0.352941, 0.164706, 1)
 Heading/constants/outline_size = 25
 Heading/fonts/italics_font = ExtResource("3_kton3")
 Heading/fonts/normal_font = ExtResource("2_000it")
+Heading2/base_type = &"Heading"
+Heading2/colors/default_color = Color(0.541176, 0.258824, 0.4, 1)
+Heading2/colors/font_outline_color = Color(0.270588, 0.0980392, 0.215686, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_cfugr")
 RichTextLabel/colors/default_color = Color(0.270222, 0.270222, 0.270222, 1)
 RichTextLabel/font_sizes/normal_font_size = 48
 RichTextLabel/fonts/italics_font = ExtResource("3_kton3")
 RichTextLabel/fonts/normal_font = ExtResource("3_kton3")
 Title/base_type = &"RichTextLabel"
-Title/colors/default_color = Color(0.934063, 0.765569, 0.862853, 1)
-Title/colors/font_outline_color = Color(0.875995, 0.582195, 0.761913, 1)
+Title/colors/default_color = Color(0.541176, 0.258824, 0.4, 1)
+Title/colors/font_outline_color = Color(0.27402, 0.097993, 0.214714, 1)
+Title/constants/outline_size = 25
 Title/font_sizes/normal_font_size = 128
 Title/fonts/italics_font = ExtResource("3_kton3")
 Title/fonts/normal_font = ExtResource("2_000it")

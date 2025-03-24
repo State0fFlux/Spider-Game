@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c16sah47a21lh" path="res://art/fg.png" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c2c1vrnnfxc5" path="res://art/bg.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c6oh02wusy665" path="res://objects/player.tscn" id="3_iywne"]
-[ext_resource type="Theme" uid="uid://dymcexubug2ec" path="res://spring_theme.tres" id="3_p57ef"]
+[ext_resource type="Theme" uid="uid://dymcexubug2ec" path="res://theme.tres" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/egg_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/web_spawner.tscn" id="5_7jktm"]
 
@@ -33,7 +33,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = \"eggs[i]: \" + Global.num_format(Stats.eggs) + \"[/i]\"
+	text = \" eggs[i]: \" + Global.num_format(Stats.eggs) + \"[/i]\"
 "
 
 [sub_resource type="GDScript" id="GDScript_0tnpc"]
@@ -47,7 +47,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = \"distance[i]: \" + Global.num_format(Global.dist) + \"[/i] inches\"
+	text = \" distance[i]: \" + Global.num_format(Global.dist) + \"[/i] inches\"
 "
 
 [sub_resource type="Curve" id="Curve_p57ef"]
@@ -143,9 +143,9 @@ offset_top = 296.0
 offset_right = 728.0
 offset_bottom = 464.0
 theme = ExtResource("3_p57ef")
-theme_type_variation = &"Heading"
+theme_type_variation = &"Heading2"
 bbcode_enabled = true
-text = "eggs[i]: 500 [/i]"
+text = " eggs[i]: 500 [/i]"
 vertical_alignment = 1
 script = SubResource("GDScript_gee14")
 
@@ -154,9 +154,9 @@ offset_left = 160.0
 offset_top = 400.0
 offset_right = 1048.0
 offset_bottom = 544.0
-theme_type_variation = &"Heading"
+theme_type_variation = &"Heading2"
 bbcode_enabled = true
-text = "Distance[i]: 500[/i] inches"
+text = " Distance[i]: 500[/i] inches"
 vertical_alignment = 1
 script = SubResource("GDScript_0tnpc")
 

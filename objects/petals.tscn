@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://xiiae60ertcx"]
 
-[ext_resource type="Texture2D" uid="uid://30qm47nnfxoj" path="res://art/petal.png" id="1_o6fiw"]
+[ext_resource type="Texture2D" uid="uid://cquvhyiv20fqw" path="res://art/leaf.png" id="1_o6fiw"]
 
 [sub_resource type="GDScript" id="GDScript_o6fiw"]
 script/source = "extends Node2D
@@ -45,7 +45,7 @@ turbulence_enabled = true
 script = SubResource("GDScript_o6fiw")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 150
+amount = 30
 texture = ExtResource("1_o6fiw")
-lifetime = 20.0
+lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_pm1d3")
