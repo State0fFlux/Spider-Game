@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://xiiae60ertcx"]
+[gd_scene load_steps=7 format=3 uid="uid://xiiae60ertcx"]
 
 [ext_resource type="Texture2D" uid="uid://30qm47nnfxoj" path="res://art/petal.png" id="1_o6fiw"]
 
@@ -16,7 +16,13 @@ func _process(delta: float) -> void:
 	particles.process_material.gravity = Vector3(2000 * (Global.wind_direction + Global.wind_strength), 1000, 0)
 "
 
+[sub_resource type="Curve" id="Curve_o6fiw"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_kq3lf"]
+curve = SubResource("Curve_o6fiw")
 
 [sub_resource type="CurveTexture" id="CurveTexture_unbo2"]
 
