@@ -1,22 +1,26 @@
-[gd_scene load_steps=12 format=3 uid="uid://duoq6b6hlb7si"]
+[gd_scene load_steps=15 format=3 uid="uid://duoq6b6hlb7si"]
 
 [ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://scenes/game.gd" id="1_80nbo"]
-[ext_resource type="Texture2D" uid="uid://brtwlynh0skve" path="res://art/bg.jpg" id="2_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://xiiae60ertcx" path="res://objects/petals.tscn" id="2_gee14"]
+[ext_resource type="Texture2D" uid="uid://c16sah47a21lh" path="res://art/fg.png" id="2_p57ef"]
+[ext_resource type="Texture2D" uid="uid://c2c1vrnnfxc5" path="res://art/bg.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c6oh02wusy665" path="res://objects/player.tscn" id="3_iywne"]
 [ext_resource type="Theme" uid="uid://dymcexubug2ec" path="res://theme.tres" id="3_p57ef"]
-[ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/coin_spawner.tscn" id="4_7jktm"]
+[ext_resource type="PackedScene" uid="uid://cl3duxofn5hyw" path="res://objects/egg_spawner.tscn" id="4_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bglkg6s10qbxp" path="res://objects/web_spawner.tscn" id="5_7jktm"]
 
-[sub_resource type="Gradient" id="Gradient_u5sy4"]
-offsets = PackedFloat32Array(0, 0.574675, 0.662338, 0.99026)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.586583, 0.586583, 0.586583, 1, 0.0904823, 0.0904823, 0.0904823, 1)
+[sub_resource type="GDScript" id="GDScript_u5sy4"]
+script/source = "extends ParallaxBackground
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gee14"]
-gradient = SubResource("Gradient_u5sy4")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.2)
-metadata/_snap_enabled = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	scroll_base_offset -= Vector2(0, Global.speed * delta)
+"
 
 [sub_resource type="GDScript" id="GDScript_iywne"]
 script/source = "extends RichTextLabel
@@ -29,7 +33,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	text = \"Coins: \" + str(Stats.coins)
+	text = \"Eggs: \" + str(Stats.eggs)
 "
 
 [sub_resource type="GDScript" id="GDScript_p57ef"]
@@ -51,6 +55,16 @@ _limits = [0.0, 30.0, -1.0, 1.5]
 _data = [Vector2(-0.0542327, 7.34474), 0.0, 0.0, 0, 0, Vector2(0.0648148, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Gradient" id="Gradient_u5sy4"]
+offsets = PackedFloat32Array(0, 0.574675, 0.662338, 0.99026)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.586583, 0.586583, 0.586583, 1, 0.0904823, 0.0904823, 0.0904823, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gee14"]
+gradient = SubResource("Gradient_u5sy4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.860092, 0.144495)
+
 [node name="game" type="Node2D"]
 script = ExtResource("1_80nbo")
 metadata/_edit_vertical_guides_ = [0.0, -960.0, 960.0]
@@ -64,6 +78,9 @@ collision_mask = 3
 build_mode = 1
 polygon = PackedVector2Array(-960, -544, 960, -544, 960, 544, -960, 544)
 
+[node name="Petals" parent="." instance=ExtResource("2_gee14")]
+position = Vector2(0, -536)
+
 [node name="Darkness" type="CanvasModulate" parent="."]
 visible = false
 position = Vector2(0, 64)
@@ -76,30 +93,41 @@ autostart = true
 [node name="Background" type="Node2D" parent="."]
 z_index = -2
 
-[node name="Parallax2D" type="Parallax2D" parent="Background"]
-scale = Vector2(0.3, 0.3)
-scroll_scale = Vector2(0, 1)
-repeat_size = Vector2(1080, 1920)
-autoscroll = Vector2(0, -1200)
-repeat_times = 6
-follow_viewport = false
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+follow_viewport_enabled = true
+script = SubResource("GDScript_u5sy4")
+
+[node name="Background" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0, 1.5)
+motion_mirroring = Vector2(0, 2701)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Background"]
 position = Vector2(-2.09808e-05, -1.52588e-05)
-texture = ExtResource("2_fc0e3")
-offset = Vector2(10.6667, 277.333)
+texture = ExtResource("2_u5sy4")
+metadata/_edit_lock_ = true
+
+[node name="Foreground" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0, 1)
+motion_mirroring = Vector2(0, 2701)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxBackground/Foreground"]
+position = Vector2(-2.09808e-05, -1.52588e-05)
+texture = ExtResource("2_p57ef")
+metadata/_edit_lock_ = true
+
+[node name="Sky" type="ColorRect" parent="Background/ParallaxBackground"]
+z_index = -10
+offset_left = -960.0
+offset_top = -544.0
+offset_right = 960.0
+offset_bottom = 544.0
+color = Color(0.580234, 0.852195, 0.987246, 1)
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
-
-[node name="Vignette" type="PointLight2D" parent="Camera2D"]
-visible = false
-position = Vector2(2.38419e-07, 4.76837e-07)
-scale = Vector2(29.875, 16.875)
-energy = 0.8
-texture = SubResource("GradientTexture2D_gee14")
 
 [node name="UI" type="Node2D" parent="Camera2D"]
 position = Vector2(-7.15256e-07, 0)
@@ -108,21 +136,19 @@ scale = Vector2(2.65556, 0.84375)
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D/UI"]
 follow_viewport_enabled = true
 
-[node name="Coins Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
-offset_left = -344.0
-offset_top = 408.0
-offset_right = -16.0
-offset_bottom = 504.0
+[node name="Eggs Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
+offset_left = -488.0
+offset_top = 344.0
+offset_bottom = 512.0
 theme = ExtResource("3_p57ef")
-text = "Coins: 0"
+text = "Eggs: 0"
 vertical_alignment = 1
 script = SubResource("GDScript_iywne")
 
 [node name="Distance Label" type="RichTextLabel" parent="Camera2D/UI/CanvasLayer"]
-offset_left = 160.0
-offset_top = 408.0
-offset_right = 488.0
-offset_bottom = 504.0
+offset_top = 352.0
+offset_right = 888.0
+offset_bottom = 496.0
 text = "Distance: 0"
 vertical_alignment = 1
 script = SubResource("GDScript_p57ef")
@@ -132,39 +158,49 @@ z_index = 5
 position = Vector2(0, -128)
 scale = Vector2(0.5, 0.5)
 
-[node name="Line2D" type="Line2D" parent="Player"]
+[node name="String" type="Line2D" parent="Player"]
 z_index = -1
 points = PackedVector2Array(0, -96, 0, -3952)
 width = 20.0
 width_curve = SubResource("Curve_p57ef")
 default_color = Color(0.658824, 0.666667, 0.572549, 1)
+metadata/_edit_lock_ = true
+
+[node name="Vignette" type="PointLight2D" parent="Player"]
+visible = false
+position = Vector2(0, 128)
+scale = Vector2(59.75, 33.75)
+energy = 0.8
+texture = SubResource("GradientTexture2D_gee14")
 
 [node name="WebSpawner" parent="." instance=ExtResource("5_7jktm")]
+z_index = 3
 position = Vector2(0, 1280)
 
 [node name="levelTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 30.0
 autostart = true
 
 [node name="GarbageCollector" type="Node2D" parent="."]
 position = Vector2(0, -1280)
 
-[node name="CoinTrack" type="Node2D" parent="."]
+[node name="EggTrack" type="Node2D" parent="."]
+z_index = 4
 position = Vector2(0, 1152)
 
-[node name="CoinSpawner" parent="CoinTrack" instance=ExtResource("4_7jktm")]
-position = Vector2(-200, 0)
+[node name="EggSpawner" parent="EggTrack" instance=ExtResource("4_7jktm")]
+position = Vector2(-448, 0)
 metadata/_edit_lock_ = true
 
-[node name="CoinSpawner2" parent="CoinTrack" instance=ExtResource("4_7jktm")]
+[node name="EggSpawner2" parent="EggTrack" instance=ExtResource("4_7jktm")]
 metadata/_edit_lock_ = true
 
-[node name="CoinSpawner3" parent="CoinTrack" instance=ExtResource("4_7jktm")]
-position = Vector2(200, 0)
+[node name="EggSpawner3" parent="EggTrack" instance=ExtResource("4_7jktm")]
+position = Vector2(448, 0)
 metadata/_edit_lock_ = true
 
 [node name="windTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 10.0
 autostart = true
 
 [connection signal="timeout" from="obstacleTimer" to="WebSpawner" method="_on_obstacle_timer_timeout"]

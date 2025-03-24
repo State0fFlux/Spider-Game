@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://dymcexubug2ec"]
 
-[ext_resource type="FontFile" uid="uid://ditol3ix31l3g" path="res://fonts/spiderfingers/Spiderfingers.ttf" id="1_e1x85"]
+[ext_resource type="FontFile" uid="uid://bfl5t678no37o" path="res://fonts/blackwidow-font/Blackwidow-o6ga.ttf" id="1_e1x85"]
 
 [resource]
-RichTextLabel/font_sizes/normal_font_size = 64
-RichTextLabel/fonts/normal_font = ExtResource("1_e1x85")
+default_font = ExtResource("1_e1x85")
+default_font_size = 128

@@ -1,16 +1,8 @@
-; Engine configuration file.
-; It's best edited using the editor UI and not directly,
-; since the parameters that go here are not all obvious.
-;
-; Format:
-;   [section] ; section goes between []
-;   param=value ; assign values to parameters
-
 config_version=5
 
 [application]
 
-config/name="Spider Game"
+config/name="Where the Wind Goes"
 run/main_scene="uid://duoq6b6hlb7si"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
@@ -72,10 +64,12 @@ move_down={
 
 [layer_names]
 
+2d_render/layer_1="flashlight"
 2d_physics/layer_1="Default"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Web"
 2d_physics/layer_4="Bridge"
+2d_physics/layer_5="Egg"
 
 [rendering]
 

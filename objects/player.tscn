@@ -7,7 +7,7 @@
 radius = 64.0
 height = 336.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 9
 motion_mode = 1

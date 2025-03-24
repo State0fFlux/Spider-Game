@@ -67,4 +67,9 @@ collision_mask = 2
 texture = ExtResource("2_w6m4c")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bridge"]
-polygon = PackedVector2Array(-102, -360, -48, -96, -42, -16, -48, 80, -72, 232, -90, 320, -72, 344, -2.28882e-05, 368, 96, 352, 126, 328, 114, 216, 78, -144, 162, -360, 18, -304)
+scale = Vector2(0.5, 1)
+polygon = PackedVector2Array(-168, -360, -48, -96, -42, -16, -48, 80, -108, 232, -132, 312, -72, 344, -2.28882e-05, 368, 96, 352, 192, 328, 156, 216, 96.0002, -144, 288.001, -360, 18, -304)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Bridge" to="." method="_on_bridge_body_entered"]
+[connection signal="body_exited" from="Bridge" to="." method="_on_bridge_body_exited"]

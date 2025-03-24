@@ -18,12 +18,17 @@ func _process(delta: float) -> void:
 	if global_position.y <= Global.garbage.global_position.y:
 		queue_free()
 	
-	bridge.rotation += self_speed * delta * (-1.0 if Global.wind_from_east else 1.0)
-	
-	var bodies = area.get_overlapping_bodies()
-	for body in bodies:
-		if body.is_in_group("Player") and not Global.on_bridge:
-			get_tree().reload_current_scene()
-		pass
-		
-	
+	bridge.rotation += self_speed * delta * Global.wind_direction
+
+func _on_bridge_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		area.monitoring = false
+
+func _on_bridge_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		area.monitoring = true
+
+# Web detection
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		get_tree().reload_current_scene()

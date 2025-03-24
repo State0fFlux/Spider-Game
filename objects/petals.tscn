@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://xiiae60ertcx"]
+
+[ext_resource type="Texture2D" uid="uid://30qm47nnfxoj" path="res://art/petal.png" id="1_o6fiw"]
+
+[sub_resource type="GDScript" id="GDScript_o6fiw"]
+script/source = "extends Node2D
+
+@onready var particles = $GPUParticles2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	particles.process_material.gravity = Vector3(2000 * (Global.wind_direction + Global.wind_strength), 1000, 0)
+"
+
+[sub_resource type="CurveTexture" id="CurveTexture_kq3lf"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_unbo2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pm1d3"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2000, 1, 1)
+angle_min = 90.0
+angle_max = 90.0
+angular_velocity_curve = SubResource("CurveTexture_kq3lf")
+radial_velocity_curve = SubResource("CurveTexture_unbo2")
+gravity = Vector3(1000, 1000, 0)
+scale_min = 0.25
+scale_max = 0.5
+turbulence_enabled = true
+
+[node name="Petals" type="Node2D"]
+script = SubResource("GDScript_o6fiw")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 150
+texture = ExtResource("1_o6fiw")
+lifetime = 20.0
+process_material = SubResource("ParticleProcessMaterial_pm1d3")

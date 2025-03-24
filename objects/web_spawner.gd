@@ -8,7 +8,7 @@ func _ready() -> void:
 func spawn_instance():
 	var instance = scene.instantiate()
 	
-	instance.self_speed = randf_range(0.1,2)
+	instance.self_speed = randf_range(0.1,1)
 	instance.base = randf_range(0.0, 2*PI)
 	
 	add_child(instance)
