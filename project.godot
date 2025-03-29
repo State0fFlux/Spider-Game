@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Where the Wind Goes"
-config/description="Where the Wind Goes is a wind-powered endless scroller where you play as a beetle tangled in a spiderweb, navigating through nature’s obstacles. Using gusts of wind, you’ll manipulate the environment to guide your path, all while avoiding the dangers of the web."
+config/name="Where the Wind Blows"
+config/description="Where the Wind Blows is a wind-powered endless scroller where you play as a beetle tangled in a spiderweb, navigating through nature’s obstacles. Using gusts of wind, you’ll manipulate the environment to guide your path, all while avoiding the dangers of the web."
 run/main_scene="uid://dwsmll4su5prj"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0.47451, 0.627451, 0.705882, 1)
