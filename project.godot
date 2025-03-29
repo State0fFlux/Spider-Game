@@ -23,6 +23,7 @@ config/icon="uid://v5p8mj8lba22"
 Global="*res://globals/global.gd"
 Stats="*res://globals/stats.gd"
 Utils="*res://globals/utils.gd"
+AmbientNoise="*res://globals/ambient_noise.tscn"
 
 [display]
 

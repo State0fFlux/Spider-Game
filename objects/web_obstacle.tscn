@@ -42,7 +42,9 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-720, 256, -720, -256, -2.28882e-05, -128, 720, -256, 720, 256, -2.28882e-05, 128)
+position = Vector2(-6.10352e-05, 0)
+scale = Vector2(0.625002, 1)
+polygon = PackedVector2Array(-1152, 256, -1152, -256, 0, -128, 1152, -256, 1152, 256, -2.28882e-05, 128)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 clip_children = 1
@@ -58,15 +60,17 @@ texture = SubResource("NoiseTexture2D_t134x")
 metadata/_edit_lock_ = true
 
 [node name="Bridge" type="Area2D" parent="." groups=["Obstacle"]]
-position = Vector2(3.05176e-05, 0)
 scale = Vector2(1.33333, 1)
 collision_layer = 8
 collision_mask = 2
 
 [node name="Stick" type="Sprite2D" parent="Bridge"]
+position = Vector2(-2.28882e-05, 0)
 texture = ExtResource("2_w6m4c")
+offset = Vector2(-18.0005, 2.40002)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bridge"]
+position = Vector2(-18.0005, 2.40002)
 scale = Vector2(0.5, 1)
 polygon = PackedVector2Array(-168, -360, -48, -96, -42, -16, -48, 80, -108, 232, -132, 312, -72, 344, -2.28882e-05, 368, 96, 352, 192, 328, 156, 216, 96.0002, -144, 288.001, -360, 18, -304)
 

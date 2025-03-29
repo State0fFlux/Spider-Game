@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmmqoi2odiups"]
+
+[ext_resource type="AudioStream" uid="uid://dva8r6uti4wmt" path="res://audio/nature.mp3" id="1_5kkq4"]
+
+[node name="Nature" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_5kkq4")
+autoplay = true
+attenuation = 2.46229

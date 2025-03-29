@@ -10,6 +10,7 @@ func spawn_instance():
 	
 	instance.self_speed = randf_range(0.1,1)
 	instance.base = randf_range(0.0, 2*PI)
+	instance.displacement = 448 * randi_range(-1,1) # TODO: move 448 to be a global constant
 	
 	add_child(instance)
 

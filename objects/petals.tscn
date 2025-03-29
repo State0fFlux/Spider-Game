@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://xiiae60ertcx"]
+[gd_scene load_steps=5 format=3 uid="uid://xiiae60ertcx"]
 
 [ext_resource type="Texture2D" uid="uid://cquvhyiv20fqw" path="res://art/leaf.png" id="1_o6fiw"]
 
@@ -16,14 +16,6 @@ func _process(delta: float) -> void:
 	particles.process_material.gravity = Vector3(2000 * (Global.wind_direction + Global.wind_strength), 1000, 0)
 "
 
-[sub_resource type="Curve" id="Curve_o6fiw"]
-_limits = [-360.0, 360.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_kq3lf"]
-curve = SubResource("Curve_o6fiw")
-
 [sub_resource type="CurveTexture" id="CurveTexture_unbo2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pm1d3"]
@@ -31,10 +23,9 @@ lifetime_randomness = 0.5
 particle_flag_rotate_y = true
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(2000, 1, 1)
+emission_box_extents = Vector3(1, 500, 1)
 angle_min = 90.0
 angle_max = 90.0
-angular_velocity_curve = SubResource("CurveTexture_kq3lf")
 radial_velocity_curve = SubResource("CurveTexture_unbo2")
 gravity = Vector3(1000, 1000, 0)
 scale_min = 0.25
@@ -45,7 +36,7 @@ turbulence_enabled = true
 script = SubResource("GDScript_o6fiw")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 30
+amount = 15
 texture = ExtResource("1_o6fiw")
-lifetime = 5.0
+lifetime = 6.0
 process_material = SubResource("ParticleProcessMaterial_pm1d3")
