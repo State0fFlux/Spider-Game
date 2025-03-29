@@ -1,6 +1,6 @@
-# Where the Wind Goes
+# Where the Wind Blows
 
-**Where the Wind Goes** is a wind-powered endless scroller where you play as a beetle tangled in a spiderweb, navigating through nature’s obstacles. Using gusts of wind, you’ll manipulate the environment to guide your path, all while avoiding the dangers of the web.
+**Where the Wind Blows** is a wind-powered endless scroller where you play as a beetle tangled in a spiderweb, navigating through nature’s obstacles. Using gusts of wind, you’ll manipulate the environment to guide your path, all while avoiding the dangers of the web.
 
 ## Game Overview
 - **Genre**: Endless scroller, puzzle
@@ -18,5 +18,5 @@
 - **Other Tools**: XCode (for testing beta mobile mechanics)
 
 ## Public Demo
-- This game is currently up on my [itch.io](https://state0fflux.itch.io/where-the-wind-goes) account!
+- This game is currently up on my [itch.io](https://state0fflux.itch.io/where-the-wind-blows) account!
 ---
