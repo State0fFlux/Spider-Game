@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://duoq6b6hlb7si"]
+[gd_scene load_steps=14 format=3 uid="uid://duoq6b6hlb7si"]
 
 [ext_resource type="Script" uid="uid://idv65ywhhryq" path="res://scenes/game.gd" id="1_80nbo"]
 [ext_resource type="AudioStream" uid="uid://bbuiy8u743ygl" path="res://audio/wind.mp3" id="2_0tnpc"]
@@ -56,16 +56,6 @@ _limits = [0.0, 30.0, -1.0, 1.5]
 _data = [Vector2(-0.0542327, 7.34474), 0.0, 0.0, 0, 0, Vector2(0.0648148, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_u5sy4"]
-offsets = PackedFloat32Array(0, 0.574675, 0.662338, 0.99026)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.586583, 0.586583, 0.586583, 1, 0.0904823, 0.0904823, 0.0904823, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gee14"]
-gradient = SubResource("Gradient_u5sy4")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.860092, 0.144495)
-
 [node name="game" type="Node2D"]
 script = ExtResource("1_80nbo")
 
@@ -92,11 +82,6 @@ metadata/_edit_lock_ = true
 build_mode = 1
 polygon = PackedVector2Array(-960, -544, 960, -544, 960, 544, -960, 544)
 metadata/_edit_lock_ = true
-
-[node name="Darkness" type="CanvasModulate" parent="."]
-visible = false
-position = Vector2(0, 64)
-color = Color(0, 0, 0, 1)
 
 [node name="obstacleTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -187,13 +172,6 @@ width = 20.0
 width_curve = SubResource("Curve_p57ef")
 default_color = Color(0.658824, 0.666667, 0.572549, 1)
 metadata/_edit_lock_ = true
-
-[node name="Vignette" type="PointLight2D" parent="Player"]
-visible = false
-position = Vector2(0, 128)
-scale = Vector2(59.75, 33.75)
-energy = 0.8
-texture = SubResource("GradientTexture2D_gee14")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Player"]
 scale = Vector2(2, 2)

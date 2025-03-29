@@ -9,7 +9,7 @@ height = 336.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 29
 motion_mode = 1
 script = ExtResource("1_ykyjo")
 
@@ -18,5 +18,4 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_ykyjo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_ykyjo")

@@ -16,6 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	position.y -= Global.speed * delta
 	if global_position.y <= Global.garbage.global_position.y:
 		queue_free()
@@ -39,7 +40,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func displace() -> void:
 	var collider = get_node("Area2D/CollisionPolygon2D")
 	var web = get_node("Polygon2D")
-	var polygon: PackedVector2Array = web.get_polygon()
+	var polygon: PackedVector2Array = collider.get_polygon()
 	polygon[2].x = displacement
 	polygon[5].x = displacement
 	collider.set_polygon(polygon)
